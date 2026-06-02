@@ -2,77 +2,79 @@
 @using MudBlazor
 @rendermode InteractiveServer
  
-<h1>Status aplikacije</h1>
- 
-<p class="@statusKlasa">@poruka</p>
- 
-<button @onclick="UkljuciUpozorenje">Prikaži upozorenje</button>
+<MudButton Color="Color.Primary">Spremi</MudButton>
+<MudText Typo="Typo.h4">Species</MudText>
+<MudText Typo="Typo.subtitle1">Subtitle1</MudText>
+<MudText Typo="Typo.subtitle2">Subtitle2</MudText>
+<MudText Typo="Typo.caption">Caption</MudText>
 
-<h1>Pozdrav</h1>
- 
-<label>
-    Ime:
-    <input @bind="ime" />
-</label>
- 
-<p>Pozdrav, @ime!</p>
+<MudStack Spacing="1">
+	<MudText Typo="Typo.h5" Color="Color.Primary">Animals</MudText>
+	<MudText Typo="Typo.h6" Color="Color.Success">Podaci su uspješno spremljeni</MudText>
+	<MudText Typo="Typo.body2" Color="Color.Error">Došlo je do greške</MudText>
+</MudStack>
 
-<h1>Obavijest</h1>
- 
-<button @onclick="PromijeniVidljivost">Prikaži ili sakrij</button>
+<MudText Typo="Typo.h4" GutterBottom="true">
+	Species
+</MudText>
 
-<h1>Životinje</h1>
- 
-<label>
-    Novo ime:
-    <input @bind="novoIme" />
-</label>
- 
-<button @onclick="DodajZivotinju">Dodaj</button>
- 
-<ul>
-    @foreach (string zivotinja in zivotinje)
-    {
-        <li>@zivotinja</li>
-    }
-</ul>
- 
-@if (prikaziPoruku)
-{
-    <p class="poruka">Ovo je važna poruka.</p>
-}
- 
-@code {
-    string poruka = "Sve je u redu.";
-    string statusKlasa = "status-ok";
-    string ime = "";
-    bool prikaziPoruku = false;
-    string novoIme = "";
- 
-    List<string> zivotinje = new()
-    {
-        "Luna",
-        "Max",
-        "Bela"
-    };
- 
-    void UkljuciUpozorenje()
-    {
-        poruka = "Potrebna je provjera.";
-        statusKlasa = "status-upozorenje";
-    }
+<MudText Typo="Typo.body1" Align="Align.Center">
+	Dobro došli u AzilEdu
+</MudText>
 
-    void PromijeniVidljivost()
-    {
-        prikaziPoruku = !prikaziPoruku;
-    }
+<MudPaper Class="pa-4">
+	<MudText Typo="Typo.h5">Animals</MudText>
+	<MudText Typo="Typo.body2">Pregled životinja u azilu.</MudText>
+</MudPaper>
 
-    void DodajZivotinju()
-    {
-        if (!string.IsNullOrWhiteSpace(novoIme))
-        {
-            zivotinje.Add(novoIme);
-            novoIme = "";
-        }
-    }
-}
+<MudGrid>
+	<MudItem xs="12" md="6">
+		<MudPaper Class="pa-4">Animals</MudPaper>
+	</MudItem>
+	<MudItem xs="12" md="6">
+		<MudPaper Class="pa-4">Species</MudPaper>
+	</MudItem>
+</MudGrid>
+
+<MudGrid>
+	<MudItem xs="12" md="4">
+		<MudPaper Class="pa-4">Animals</MudPaper>
+	</MudItem>
+	<MudItem xs="12" md="4">
+		<MudPaper Class="pa-4">Species</MudPaper>
+	</MudItem>
+	<MudItem xs="12" md="4">
+		<MudPaper Class="pa-4">Adopters</MudPaper>
+	</MudItem>
+</MudGrid>
+
+<MudGrid>
+	<MudItem xs="12" md="8">
+		<MudPaper Class="pa-4">Glavni sadržaj</MudPaper>
+	</MudItem>
+	<MudItem xs="12" md="4">
+		<MudPaper Class="pa-4">Bočni sadržaj</MudPaper>
+	</MudItem>
+</MudGrid>
+
+<MudStack Row="true" Spacing="2">
+	<MudButton Variant="Variant.Filled" Color="Color.Primary">
+		Add Species
+	</MudButton>
+
+	<MudButton Variant="Variant.Outlined" Color="Color.Secondary">
+		Pregled vrsta
+	</MudButton>
+
+	<MudButton Variant="Variant.Text" Color="Color.Info">
+		Saznaj više
+	</MudButton>
+
+	<MudButton Variant="Variant.Filled"
+			   Color="Color.Success"
+			   Size="Size.Large"
+			   StartIcon="@Icons.Material.Filled.Check">
+		Spremi
+	</MudButton>
+</MudStack>
+

@@ -1,11 +1,63 @@
 ﻿@page "/animals"
 
-<MudText Typo="Typo.h4">Animals</MudText>
-<MudText Typo="Typo.body1">Popis životinja u azilu.</MudText>
+<MudStack Spacing="2">
+    <MudText Typo="Typo.h5">Animals</MudText>
+    <MudText Typo="Typo.body2">Popis životinja u azilu.</MudText>
+</MudStack>
 
-<MudItem xs="12" md="6">
-    <MudPaper Class="pa-4" Elevation="1">
-        <MudText Typo="Typo.h6">Što ćemo graditi?</MudText>
-        <MudText>Animals, Species, Breeds, Housing Units, Adopters i Adoptions.</MudText>
-    </MudPaper>
-</MudItem>
+<MudStack Row="true" Spacing="2">
+    <MudButton Color="Color.Primary">Dodaj</MudButton>
+    <MudButton Variant="Variant.Outlined">Pregled</MudButton>
+</MudStack>
+
+<MudGrid>
+    <MudItem xs="12" md="4">
+        <MudPaper Class="pa-4" Elevation="2">
+            <MudText Typo="Typo.h6">Sve životinje</MudText>
+            <MudText Typo="Typo.body2">Pregled svih životinja</MudText>
+
+            <MudButton Variant="Variant.Filled"
+                       Color="Color.Primary"
+                       Class="mt-3">
+                Otvori pregled
+            </MudButton>
+        </MudPaper>
+    </MudItem>
+
+    <MudItem xs="12" md="4">
+        <MudPaper Class="pa-4" Elevation="2">
+            <MudText Typo="Typo.h6">Vrste i pasmine</MudText>
+            <MudText Typo="Typo.body2">
+                Organizacija životinja prema vrstama i pasminama.
+            </MudText>
+        </MudPaper>
+    </MudItem>
+ 
+    <MudItem xs="12" md="4">
+        <MudPaper Class="pa-4" Elevation="2">
+            <MudText Typo="Typo.h6">Smještaj</MudText>
+            <MudText Typo="Typo.body2">
+                Pregled bokseva, kaveza i drugih smještajnih jedinica.
+            </MudText>
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+
+<hr />
+<MudPaper Class="pa-4" Elevation="2">
+    <MudImage Src="images/dog.jpg"
+              Alt="Pas Rex"
+              Width="250"
+              Class="mb-2" />
+
+    <MudText Typo="Typo.h6">Rex</MudText>
+    <MudText Typo="Typo.body2">
+        Pas star 3 godine, miran i druželjubiv.
+    </MudText>
+
+    <MudButton Variant="Variant.Filled"
+               Color="Color.Primary"
+               Class="mt-2">
+        Detalji
+    </MudButton>
+</MudPaper>
