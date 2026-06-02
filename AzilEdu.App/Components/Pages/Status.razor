@@ -1,0 +1,77 @@
+﻿@page "/status"
+@rendermode InteractiveServer
+ 
+<h1>Status aplikacije</h1>
+ 
+<p class="@statusKlasa">@poruka</p>
+ 
+<button @onclick="UkljuciUpozorenje">Prikaži upozorenje</button>
+
+<h1>Pozdrav</h1>
+ 
+<label>
+    Ime:
+    <input @bind="ime" />
+</label>
+ 
+<p>Pozdrav, @ime!</p>
+
+<h1>Obavijest</h1>
+ 
+<button @onclick="PromijeniVidljivost">Prikaži ili sakrij</button>
+
+<h1>Životinje</h1>
+ 
+<label>
+    Novo ime:
+    <input @bind="novoIme" />
+</label>
+ 
+<button @onclick="DodajZivotinju">Dodaj</button>
+ 
+<ul>
+    @foreach (string zivotinja in zivotinje)
+    {
+        <li>@zivotinja</li>
+    }
+</ul>
+ 
+@if (prikaziPoruku)
+{
+    <p class="poruka">Ovo je važna poruka.</p>
+}
+ 
+@code {
+    string poruka = "Sve je u redu.";
+    string statusKlasa = "status-ok";
+    string ime = "";
+    bool prikaziPoruku = false;
+    string novoIme = "";
+ 
+    List<string> zivotinje = new()
+    {
+        "Luna",
+        "Max",
+        "Bela"
+    };
+ 
+    void UkljuciUpozorenje()
+    {
+        poruka = "Potrebna je provjera.";
+        statusKlasa = "status-upozorenje";
+    }
+
+    void PromijeniVidljivost()
+    {
+        prikaziPoruku = !prikaziPoruku;
+    }
+
+    void DodajZivotinju()
+    {
+        if (!string.IsNullOrWhiteSpace(novoIme))
+        {
+            zivotinje.Add(novoIme);
+            novoIme = "";
+        }
+    }
+}

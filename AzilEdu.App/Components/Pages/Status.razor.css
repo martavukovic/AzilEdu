@@ -1,0 +1,23 @@
+﻿.status-ok {
+    color: darkgreen;
+    font-weight: 700;
+}
+
+.status-upozorenje {
+    color: darkred;
+    font-weight: 700;
+}
+
+.poruka {
+    padding: 12px;
+    border: 1px solid #b6d4fe;
+    background: #eef6ff;
+}
+
+button {
+    margin-left: 8px;
+}
+
+li {
+    margin: 4px 0;
+}
