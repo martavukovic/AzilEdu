@@ -3,8 +3,152 @@
 
 <h3>Domaći rad</h3>
 
-<h2>Zadatak 1</h2>
+<hr />
+
+<h2>Zadatak 1: Promjena boje teksta</h2>
+
+<p class="@poruka">
+    Klikni gumb za promjenu boje.
+</p>
+
+<button @onclick="PromijeniBoju">
+    Promijeni boju
+</button>
+
+<hr />
+
+<h2>Zadatak 2: Brojač</h2>
+
+<p>Trenutna vrijednost brojača: @brojac</p>
+
+<button @onclick="Povecaj">+</button>
+<button @onclick="Smanji">-</button>
+
+<hr />
+
+<h2>Zadatak 3: Ime i prezime</h2>
+
+<label>Ime:</label>
+<input @bind="ime" />
+
+<br />
+<br />
+
+<label>Prezime:</label>
+<input @bind="prezime" />
+
+<p>Puno ime: @ime @prezime</p>
+
+<hr />
+
+<h2>Zadatak 4: Prikaz i skrivanje poruke</h2>
+
+<button @onclick="PrebaciPrikaz">
+    Prikaži / sakrij poruku
+</button>
+
+@if (prikazi)
+{
+    <p class="poruka-ok">
+        Ovo je skrivena ili prikazana poruka!
+    </p>
+}
+
+<hr />
+
+<h2>Zadatak 5: Lista filmova</h2>
+
+<ul>
+    @foreach (var film in filmovi)
+    {
+        <li>@film</li>
+    }
+</ul>
+
+<hr />
+
+<h2>Zadatak 6: To-do lista</h2>
+
+<input @bind="noviZadatak" placeholder="Novi zadatak" />
+<button @onclick="DodajZadatak">Dodaj</button>
+
+@if (zadaci.Count == 0)
+{
+    <p>Nema zadataka.</p>
+}
+else
+{
+    <ul>
+        @foreach (var z in zadaci)
+        {
+            <li>@z</li>
+        }
+    </ul>
+}
+
+<hr />
+
+<h2>Zadatak 7: Status kartica</h2>
+
+<section class="kartica">
+    <h4>@nazivAplikacije</h4>
+    <p>@opis</p>
+    <p>Status: @status</p>
+</section>
 
 @code {
+    private string poruka = "tekst-plavi";
 
+    private void PromijeniBoju()
+    {
+        poruka = poruka == "tekst-plavi"
+            ? "tekst-crveni"
+            : "tekst-plavi";
+    }
+
+    private int brojac = 0;
+
+    private void Povecaj()
+    {
+        brojac++;
+    }
+
+    private void Smanji()
+    {
+        brojac--;
+    }
+
+    private string ime = "";
+    private string prezime = "";
+
+    private bool prikazi = false;
+
+    private void PrebaciPrikaz()
+    {
+        prikazi = !prikazi;
+    }
+
+    private List<string> filmovi = new()
+    {
+        "Inception",
+        "Interstellar",
+        "The Matrix"
+    };
+
+    private List<string> zadaci = new();
+
+    private string noviZadatak = "";
+
+    private void DodajZadatak()
+    {
+        if (!string.IsNullOrWhiteSpace(noviZadatak))
+        {
+            zadaci.Add(noviZadatak);
+            noviZadatak = "";
+        }
+    }
+
+    private string nazivAplikacije = "AzilEdu";
+    private string opis = "Zadaci za domaći";
+    private string status = "Aktivno";
 }

@@ -1,0 +1,19 @@
+﻿.tekst-plavi {
+    color: blue;
+}
+
+.tekst-crveni {
+    color: red;
+}
+
+.poruka-ok {
+    color: green;
+    font-weight: bold;
+}
+
+.kartica {
+    border: 1px solid gray;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #f5f5f5;
+}
