@@ -1,9 +1,154 @@
 ﻿@page "/species"
 
-<MudStack Spacing="3">
-    <MudText Typo="Typo.h4">Species</MudText>
-    <MudText Typo="Typo.body1">Vrste životinja u sustavu.</MudText>
-    <MudButton Variant="Variant.Filled" Color="Color.Primary">
-        Add Species
-    </MudButton>
-</MudStack>
+<MudText Typo="Typo.h3" GutterBottom="true">Species</MudText>
+
+<MudText Typo="Typo.body1" Class="mb-6">
+    Catalog of animal species registered in the shelter system. Each species contains
+    basic biological data and the current number of individuals housed in the shelter.
+</MudText>
+
+<MudGrid>
+
+    <MudItem xs="12" sm="6" md="3" Style="display: flex;">
+        <MudPaper Class="pa-4" Elevation="2" Style="width: 100%; display: flex; flex-direction: column;">
+            <MudImage Src="images/dog.jpg"
+                      Alt="Dog"
+                      Height="160"
+                      Class="mb-3"
+                      Style="height: 160px; width: 100%; object-fit: cover;" />
+            <MudText Typo="Typo.h6">Dogs</MudText>
+            <MudText Typo="Typo.caption" Color="Color.Secondary" Class="mb-2">
+                <em>Canis lupus familiaris</em>
+            </MudText>
+            <MudText Typo="Typo.body2" Class="mb-1">
+                The most common species in the shelter. Social animals that require
+                daily exercise and interaction with people.
+            </MudText>
+            <MudStack Spacing="1" Class="mb-3">
+                <MudText Typo="Typo.caption"><strong>Average lifespan:</strong> 10 – 15 years</MudText>
+                <MudText Typo="Typo.caption"><strong>Diet type:</strong> Omnivore</MudText>
+                <MudText Typo="Typo.caption"><strong>Currently in shelter:</strong> 24</MudText>
+            </MudStack>
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" FullWidth="true" Style="margin-top: auto;">
+                View Details
+            </MudButton>
+        </MudPaper>
+    </MudItem>
+
+    <MudItem xs="12" sm="6" md="3" Style="display: flex;">
+        <MudPaper Class="pa-4" Elevation="2" Style="width: 100%; display: flex; flex-direction: column;">
+            <MudImage Src="images/cat.jpg"
+                      Alt="Cat"
+                      Height="160"
+                      Class="mb-3"
+                      Style="height: 160px; width: 100%; object-fit: cover;" />
+            <MudText Typo="Typo.h6">Cats</MudText>
+            <MudText Typo="Typo.caption" Color="Color.Secondary" Class="mb-2">
+                <em>Felis catus</em>
+            </MudText>
+            <MudText Typo="Typo.body2" Class="mb-1">
+                Independent and self-sufficient animals. They adapt well to apartment
+                living with minimal space requirements.
+            </MudText>
+            <MudStack Spacing="1" Class="mb-3">
+                <MudText Typo="Typo.caption"><strong>Average lifespan:</strong> 12 – 18 years</MudText>
+                <MudText Typo="Typo.caption"><strong>Diet type:</strong> Carnivore</MudText>
+                <MudText Typo="Typo.caption"><strong>Currently in shelter:</strong> 31</MudText>
+            </MudStack>
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" FullWidth="true" Style="margin-top: auto;">
+                View Details
+            </MudButton>
+        </MudPaper>
+    </MudItem>
+
+    <MudItem xs="12" sm="6" md="3" Style="display: flex;">
+        <MudPaper Class="pa-4" Elevation="2" Style="width: 100%; display: flex; flex-direction: column;">
+            <MudImage Src="images/rabbit.jpg"
+                      Alt="Rabbit"
+                      Height="160"
+                      Class="mb-3"
+                      Style="height: 160px; width: 100%; object-fit: cover;" />
+            <MudText Typo="Typo.h6">Rabbits</MudText>
+            <MudText Typo="Typo.caption" Color="Color.Secondary" Class="mb-2">
+                <em>Oryctolagus cuniculus</em>
+            </MudText>
+            <MudText Typo="Typo.body2" Class="mb-1">
+                Quiet and clean animals, ideal for adopters with smaller living spaces.
+                They require fresh hay and vegetables daily.
+            </MudText>
+            <MudStack Spacing="1" Class="mb-3">
+                <MudText Typo="Typo.caption"><strong>Average lifespan:</strong> 8 – 12 years</MudText>
+                <MudText Typo="Typo.caption"><strong>Diet type:</strong> Herbivore</MudText>
+                <MudText Typo="Typo.caption"><strong>Currently in shelter:</strong> 9</MudText>
+            </MudStack>
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" FullWidth="true" Style="margin-top: auto;">
+                View Details
+            </MudButton>
+        </MudPaper>
+    </MudItem>
+
+    <MudItem xs="12" sm="6" md="3" Style="display: flex;">
+        <MudPaper Class="pa-4" Elevation="2" Style="width: 100%; display: flex; flex-direction: column;">
+            <MudImage Src="images/bird.jpg"
+                      Alt="Bird"
+                      Height="160"
+                      Class="mb-3"
+                      Style="height: 160px; width: 100%; object-fit: cover;" />
+            <MudText Typo="Typo.h6">Birds</MudText>
+            <MudText Typo="Typo.caption" Color="Color.Secondary" Class="mb-2">
+                <em>Aves spp.</em>
+            </MudText>
+            <MudText Typo="Typo.body2" Class="mb-1">
+                Intelligent and social animals. Some species can live for several
+                decades and require mental stimulation.
+            </MudText>
+            <MudStack Spacing="1" Class="mb-3">
+                <MudText Typo="Typo.caption"><strong>Average lifespan:</strong> 5 – 30 years</MudText>
+                <MudText Typo="Typo.caption"><strong>Diet type:</strong> Omnivore</MudText>
+                <MudText Typo="Typo.caption"><strong>Currently in shelter:</strong> 7</MudText>
+            </MudStack>
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" FullWidth="true" Style="margin-top: auto;">
+                View Details
+            </MudButton>
+        </MudPaper>
+    </MudItem>
+
+</MudGrid>
+
+<MudText Typo="Typo.h5" GutterBottom="true" Class="mt-8">All Species Overview</MudText>
+
+<MudTable Items="_species" Dense="true" Hover="true" Striped="true" Elevation="1">
+    <HeaderContent>
+        <MudTh>Name</MudTh>
+        <MudTh>Latin Name</MudTh>
+        <MudTh>Lifespan</MudTh>
+        <MudTh>Diet Type</MudTh>
+        <MudTh>In Shelter</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd>@context.Name</MudTd>
+        <MudTd><em>@context.LatinName</em></MudTd>
+        <MudTd>@context.Lifespan</MudTd>
+        <MudTd>@context.Diet</MudTd>
+        <MudTd><strong>@context.CountInShelter</strong></MudTd>
+    </RowTemplate>
+</MudTable>
+
+@code {
+    private List<SpeciesItem> _species = new()
+    {
+        new SpeciesItem { Name = "Dogs", LatinName = "Canis lupus familiaris", Lifespan = "10 – 15 years", Diet = "Omnivore", CountInShelter = 24 },
+        new SpeciesItem { Name = "Cats", LatinName = "Felis catus", Lifespan = "12 – 18 years", Diet = "Carnivore", CountInShelter = 31 },
+        new SpeciesItem { Name = "Rabbits", LatinName = "Oryctolagus cuniculus", Lifespan = "8 – 12 years", Diet = "Herbivore", CountInShelter = 9 },
+        new SpeciesItem { Name = "Birds", LatinName = "Aves spp.", Lifespan = "5 – 30 years", Diet = "Omnivore", CountInShelter = 7 }
+    };
+
+    private class SpeciesItem
+    {
+        public string Name { get; set; } = "";
+        public string LatinName { get; set; } = "";
+        public string Lifespan { get; set; } = "";
+        public string Diet { get; set; } = "";
+        public int CountInShelter { get; set; }
+    }
+}
