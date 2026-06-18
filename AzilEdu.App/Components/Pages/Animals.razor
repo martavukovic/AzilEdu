@@ -1,63 +1,243 @@
 ﻿@page "/animals"
+@rendermode InteractiveServer
+@using AzilEdu.Shared.Models
 
-<MudStack Spacing="2">
-    <MudText Typo="Typo.h5">Animals</MudText>
-    <MudText Typo="Typo.body2">Popis životinja u azilu.</MudText>
-</MudStack>
-
-<MudStack Row="true" Spacing="2">
-    <MudButton Color="Color.Primary">Dodaj</MudButton>
-    <MudButton Variant="Variant.Outlined">Pregled</MudButton>
-</MudStack>
+<MudText Typo="Typo.h4" GutterBottom="true">Životinje</MudText>
+<MudText Typo="Typo.body1" Class="mb-4">
+    Ovo je početna stranica modula za životinje. U sljedećoj lekciji ovdje ćemo dodati model
+    <strong>Animal</strong>, probne podatke i tablični prikaz.
+</MudText>
 
 <MudGrid>
     <MudItem xs="12" md="4">
-        <MudPaper Class="pa-4" Elevation="2">
-            <MudText Typo="Typo.h6">Sve životinje</MudText>
-            <MudText Typo="Typo.body2">Pregled svih životinja</MudText>
-
-            <MudButton Variant="Variant.Filled"
-                       Color="Color.Primary"
-                       Class="mt-3">
-                Otvori pregled
-            </MudButton>
+        <MudPaper Class="pa-4" Elevation="1">
+            <MudText Typo="Typo.h6">Popis životinja</MudText>
+            <MudText Typo="Typo.body2">Ovdje će se prikazivati životinje koje se nalaze u azilu.</MudText>
         </MudPaper>
     </MudItem>
 
     <MudItem xs="12" md="4">
-        <MudPaper Class="pa-4" Elevation="2">
-            <MudText Typo="Typo.h6">Vrste i pasmine</MudText>
-            <MudText Typo="Typo.body2">
-                Organizacija životinja prema vrstama i pasminama.
-            </MudText>
+        <MudPaper Class="pa-4" Elevation="1">
+            <MudText Typo="Typo.h6">Status</MudText>
+            <MudText Typo="Typo.body2">Kasnije ćemo razlikovati životinje koje su u azilu i udomljene životinje.</MudText>
         </MudPaper>
     </MudItem>
- 
+
     <MudItem xs="12" md="4">
-        <MudPaper Class="pa-4" Elevation="2">
-            <MudText Typo="Typo.h6">Smještaj</MudText>
-            <MudText Typo="Typo.body2">
-                Pregled bokseva, kaveza i drugih smještajnih jedinica.
-            </MudText>
+        <MudPaper Class="pa-4" Elevation="1">
+            <MudText Typo="Typo.h6">Slike</MudText>
+            <MudText Typo="Typo.body2">Modul će koristiti slike iz foldera <code>wwwroot/images/animals</code>.</MudText>
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+<hr />
+
+<MudButtonGroup Color="Color.Primary" Variant="Variant.Outlined" Class="mb-4">
+    <MudButton OnClick="@ShowAllAnimals">Sve</MudButton>
+    <MudButton OnClick="@ShowAnimalsInShelter">U azilu</MudButton>
+    <MudButton OnClick="@ShowAdoptedAnimals">Udomljene</MudButton>
+</MudButtonGroup>
+
+<MudGrid Class="mb-4">
+    <MudItem xs="12" sm="4">
+        <MudPaper Class="pa-4">
+            <MudText Typo="Typo.subtitle2">Ukupno životinja</MudText>
+            <MudText Typo="Typo.h5">@TotalAnimals</MudText>
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="12" sm="4">
+        <MudPaper Class="pa-4">
+            <MudText Typo="Typo.subtitle2">U azilu</MudText>
+            <MudText Typo="Typo.h5">@AvailableAnimals</MudText>
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="12" sm="4">
+        <MudPaper Class="pa-4">
+            <MudText Typo="Typo.subtitle2">Udomljene</MudText>
+            <MudText Typo="Typo.h5">@AdoptedAnimals</MudText>
         </MudPaper>
     </MudItem>
 </MudGrid>
 
-<hr />
-<MudPaper Class="pa-4" Elevation="2">
-    <MudImage Src="images/dog.jpg"
-              Alt="Pas Rex"
-              Width="250"
-              Class="mb-2" />
+<MudTable Items="@FilteredAnimals" Hover="true" Striped="true" Bordered="true" Dense="true">
+    <HeaderContent>
+        <MudTh>Slika</MudTh>
+        <MudTh>Ime</MudTh>
+        <MudTh>Vrsta</MudTh>
+        <MudTh>Pasmina</MudTh>
+        <MudTh>Spol</MudTh>
+        <MudTh>Starost</MudTh>
+        <MudTh>Datum dolaska</MudTh>
+        <MudTh>Status</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Slika">
+            <MudAvatar Size="Size.Large">
+                <MudImage Src="@context.ImageUrl" Alt="@context.Name" />
+            </MudAvatar>
+        </MudTd>
+        <MudTd DataLabel="Ime">@context.Name</MudTd>
+        <MudTd DataLabel="Vrsta">@context.Species</MudTd>
+        <MudTd DataLabel="Pasmina">@context.Breed</MudTd>
+        <MudTd DataLabel="Spol">@context.Gender</MudTd>
+        <MudTd DataLabel="Starost">@GetAgeText(context) </MudTd>
+        <MudTd DataLabel="Datum dolaska">@GetArrivalDateText(context)</MudTd>
+        <MudTd DataLabel="Status">
+            <MudChip T="string" Color="@(context.IsAdopted? Color.Success: Color.Info)" Variant="Variant.Filled">
+                @GetAdoptionStatusText(context)
+            </MudChip>
+        </MudTd>
+    </RowTemplate>
+</MudTable>
 
-    <MudText Typo="Typo.h6">Rex</MudText>
-    <MudText Typo="Typo.body2">
-        Pas star 3 godine, miran i druželjubiv.
-    </MudText>
+@code {
+    private int TotalAnimals => animals.Count;
+    private int AdoptedAnimals => animals.Count(a => a.IsAdopted);
+    private int AvailableAnimals => animals.Count(a => !a.IsAdopted);
 
-    <MudButton Variant="Variant.Filled"
-               Color="Color.Primary"
-               Class="mt-2">
-        Detalji
-    </MudButton>
-</MudPaper>
+    private string selectedStatus = "Sve";
+
+    private IEnumerable<Animal> FilteredAnimals =>
+    selectedStatus switch
+    {
+        "U azilu" => animals.Where(animal => !animal.IsAdopted),
+        "Udomljene" => animals.Where(animal => animal.IsAdopted),
+        _ => animals
+    };
+
+    private void ShowAllAnimals()
+    {
+        selectedStatus = "Sve";
+    }
+ 
+    private void ShowAnimalsInShelter()
+    {
+        selectedStatus = "U azilu";
+    }
+ 
+    private void ShowAdoptedAnimals()
+    {
+        selectedStatus = "Udomljene";
+    }
+
+    private string GetAdoptionStatusText(Animal animal)
+    {
+        return animal.IsAdopted ? "Udomljena" : "U azilu";
+    }
+
+    private string GetAgeText(Animal animal)
+    {
+        if (animal.Age.HasValue)
+        {
+            return $"{animal.Age.Value} god.";
+        }
+
+        return "Nepoznato";
+    }
+
+    private string GetArrivalDateText(Animal animal)
+    {
+        if (animal.ArrivalDate.HasValue)
+        {
+            return animal.ArrivalDate.Value.ToShortDateString();
+        }
+
+        return "Nije uneseno";
+    }
+
+    private List<Animal> animals = new()
+    {
+        new Animal
+        {
+            Id = 1,
+            Name = "Luna",
+            Species = "Pas",
+            Breed = "Labrador",
+            Gender = "Ženka",
+            Age = 3,
+            ArrivalDate = new DateTime(2025, 10, 12),
+            IsAdopted = false,
+            ImageUrl = "/images/animals/luna.webp",
+            Description = "Mirna i druželjubiva kujica koja voli šetnje."
+        },
+        new Animal
+        {
+            Id = 2,
+            Name = "Maza",
+            Species = "Mačka",
+            Breed = "Domaća kratkodlaka",
+            Gender = "Ženka",
+            Age = 2,
+            ArrivalDate = new DateTime(2025, 11, 5),
+            IsAdopted = true,
+            ImageUrl = "/images/animals/maza.webp",
+            Description = "Zaigrana mačka naviknuta na boravak u zatvorenom prostoru."
+        },
+        new Animal
+        {
+            Id = 3,
+            Name = "Rex",
+            Species = "Pas",
+            Breed = "Njemački ovčar",
+            Gender = "Mužjak",
+            Age = 5,
+            ArrivalDate = new DateTime(2026, 1, 20),
+            IsAdopted = false,
+            ImageUrl = "/images/animals/rex.webp",
+            Description = "Aktivan pas koji traži iskusnijeg vlasnika."
+        },
+        new Animal
+        {
+            Id = 4,
+            Name = "Nala",
+            Species = "Mačka",
+            Breed = "Maine Coon mješanac",
+            Gender = "Ženka",
+            Age = null,
+            ArrivalDate = new DateTime(2026, 2, 3),
+            IsAdopted = false,
+            ImageUrl = "/images/animals/nala.webp",
+            Description = "Mlada mačka pronađena bez poznate povijesti."
+        },
+        new Animal
+        {
+            Id = 5,
+            Name = "Tobi",
+            Species = "Pas",
+            Breed = "Mješanac",
+            Gender = "Mužjak",
+            Age = 1,
+            ArrivalDate = null,
+            IsAdopted = false,
+            ImageUrl = "/images/animals/tobi.webp",
+            Description = "Vesel pas kojem datum dolaska još nije potvrđen."
+        },
+        new Animal
+        {
+            Id = 6,
+            Name = "Bruno",
+            Species = "Pas",
+            Breed = "Bigl",
+            Gender = "Mužjak",
+            Age = 4,
+            ArrivalDate = new DateTime(2025, 9, 18),
+            IsAdopted = true,
+            ImageUrl = "/images/animals/bruno.webp",
+            Description = "Udomljen pas koji ostaje u evidenciji azila."
+        },
+
+        new Animal
+        {
+            Id = 7,
+            Name = "Zen",
+            Species = "Pas",
+            Breed = "Akita",
+            Gender = "Mužjak",
+            Age = 7,
+            ArrivalDate = new DateTime(2019, 12, 3),
+            IsAdopted = true,
+            ImageUrl = "/images/animals/zen.webp",
+            Description = "Najumiljatiji pas"
+        }
+    };
+}
